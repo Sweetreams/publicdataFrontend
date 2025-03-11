@@ -1,13 +1,13 @@
 import React from 'react'
 import MenuComponents from './components/component/menu/MenuComponents'
 import { Layout } from 'antd'
-import { Outlet } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import "./styles/color.css"
 
 const App = () => {
     if(Cookies.get('token') == undefined){
-        window.location.href = 'auth'
+        return <Navigate to="/auth" replace/>
     }
     return (
         <>
