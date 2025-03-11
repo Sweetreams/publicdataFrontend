@@ -10,7 +10,7 @@ import Cookies from 'js-cookie'
 export default function authUser() {
 
   const onFinish = (values) => {
-    axios.post('http://localhost:8000/user/loginuser', values)
+    axios.post('https://publicdataapi.onrender.com/user/loginuser', values)
             .then((response) => {
               console.log(response.data)
                 Cookies.set('token', response.data.data.token)
