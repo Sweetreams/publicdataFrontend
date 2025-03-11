@@ -10,7 +10,7 @@ const RegUser = () => {
         axios.post('http://localhost:8000/user/createuser', values)
             .then((response) => {
                 Cookies.set('token', response.data.data.token)
-                window.location.href = 'http://localhost:5173';
+                // window.location.href = 'http://localhost:5173';
             }).catch(function (error) {
                 console.log(error);
             })
