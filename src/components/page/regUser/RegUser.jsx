@@ -10,7 +10,7 @@ const RegUser = () => {
         axios.post('http://localhost:8000/user/createuser', values)
             .then((response) => {
                 Cookies.set('token', response.data.data.token)
-                // window.location.href = 'http://localhost:5173';
+                return <Navigate to="/" replace/>
             }).catch(function (error) {
                 console.log(error);
             })
@@ -87,7 +87,7 @@ const RegUser = () => {
                                         style={{ marginBottom: '10px' }}>
                                         <Checkbox style={{ fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>Запомнить меня</Checkbox>
                                     </Form.Item>
-                                    <Typography.Text style={{ marginBottom: '10px', fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>У меня уже есть аккаунт, <Typography.Link className='regLink' style={{ fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }} href='http://localhost:5173/auth'>Войти?</Typography.Link></Typography.Text>
+                                    <Typography.Text style={{ marginBottom: '10px', fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>У меня уже есть аккаунт, <Typography.Link className='regLink' style={{ fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }} href='/profile'>Войти?</Typography.Link></Typography.Text>
                                     {/* <Typography.Text style={{ marginBottom: '10px' }}><Typography.Link className='forgotThePasswordLink' style={{ marginBottom: '10px', fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>Забыл пароль?</Typography.Link></Typography.Text> */}
                                     <Form.Item>
                                         <Button

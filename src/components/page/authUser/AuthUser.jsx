@@ -14,7 +14,7 @@ export default function authUser() {
             .then((response) => {
               console.log(response.data)
                 Cookies.set('token', response.data.data.token)
-                // window.location.href = 'http://localhost:5173';
+                return <Navigate to="/" replace/>
             }).catch(function (error) {
                 console.log(error);
             })
@@ -83,7 +83,7 @@ export default function authUser() {
                     style={{ marginBottom: '10px' }}>
                     <Checkbox style={{ fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>Запомнить меня</Checkbox>
                   </Form.Item>
-                  <Typography.Text style={{ marginBottom: '10px', fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>У меня нет аккаунта, <Typography.Link className='regLink' style={{ fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }} href='http://localhost:5173/reg'>Зарегистрироваться?</Typography.Link></Typography.Text>
+                  <Typography.Text style={{ marginBottom: '10px', fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>У меня нет аккаунта, <Typography.Link className='regLink' style={{ fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }} href='/profile'>Зарегистрироваться?</Typography.Link></Typography.Text>
                   {/* <Typography.Text style={{ marginBottom: '10px' }}><Typography.Link className='forgotThePasswordLink' style={{ marginBottom: '10px', fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>Забыл пароль?</Typography.Link></Typography.Text> */}
                   <Form.Item>
 
