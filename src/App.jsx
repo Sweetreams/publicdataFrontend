@@ -7,7 +7,7 @@ import "./styles/color.css"
 
 const App = () => {
     if(Cookies.get('token') == undefined){
-        return <Navigate to="/profile" replace/>
+        return <Navigate to="/auth" replace/>
     }
     return (
         <>
