@@ -6,9 +6,9 @@ import Cookies from 'js-cookie'
 import "./styles/color.css"
 
 const App = () => {
-    // if(Cookies.get('token') == undefined){
-    //     return <Navigate to="/auth" replace/>
-    // }
+    if(Cookies.get('token') == undefined){
+        return <Navigate to="/authuser" replace/>
+    }
     return (
         <>
             <Layout style={{ minHeight: '100vh', display: 'flex', flexDirection: 'row' }}>

@@ -52,14 +52,13 @@ const router = createBrowserRouter([
     element: <AuthUser/>
   },
   {
-    path:'/reg',
+    path:'/reguser',
     element: <RegUser/>
   }
 ])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthUser/>
-    {/* <RouterProvider router={router}/> */}
+    <RouterProvider router={router}/>
   </StrictMode>,
 )
