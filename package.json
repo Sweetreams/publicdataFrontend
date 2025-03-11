@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node ./main.jsx",
     "lint": "eslint .",
     "preview": "vite preview"
   },
