@@ -7,7 +7,7 @@ import "./styles/color.css"
 
 const App = () => {
     if(Cookies.get('token') == undefined){
-        window.location.href = 'publicdata-frontend-git-main-pavels-projects-089fe0b1.vercel.app/auth'
+        window.location.href = 'auth'
     }
     return (
         <>
