@@ -7,7 +7,7 @@ import "./styles/color.css"
 
 const App = () => {
     if(Cookies.get('token') == undefined){
-        return <Navigate to="publicdata-frontend-git-main-pavels-projects-089fe0b1.vercel.app/auth" replace/>
+        return <Navigate to="/auth" replace/>
     }
     return (
         <>
