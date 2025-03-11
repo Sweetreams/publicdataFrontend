@@ -15,8 +15,8 @@ export default function authUser() {
               console.log(response.data)
                 Cookies.set('token', response.data.data.token)
                 return <Navigate to="/" replace/>
-            }).catch(function (error) {
-                console.log(error);
+            }).catch(function (err) {
+                console.log(err);
             })
   }
 
