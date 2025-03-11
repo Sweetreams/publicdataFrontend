@@ -7,7 +7,7 @@ import "./styles/color.css"
 
 const App = () => {
     if(Cookies.get('token') == undefined){
-        window.location.href = 'publicdata-frontend.vercel.app/auth'
+        window.location.href = '/auth'
     }
     return (
         <>
