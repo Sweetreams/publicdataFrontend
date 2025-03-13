@@ -1,23 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "../../../styles/fonts.css"
 import "../../../styles/color.css"
-import { Button, Checkbox, ConfigProvider, Form, Input, Typography } from 'antd'
+import { Button, Checkbox, ConfigProvider, Form, Input, notification, Spin, Typography } from 'antd'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom'
+import { LoadingOutlined } from '@ant-design/icons'
 
 const RegUser = () => {
+    const [api, contextHolder] = notification.useNotification()
+    const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
     const onFinish = (values) => {
-        axios.post('http://localhost:8000/user/createuser', values)
+        setLoading(true)
+        axios.post('https://publicdataapi.onrender.com/user/createuser', values)
             .then((response) => {
+                setLoading(false)
                 Cookies.set('token', response.data.data.token)
-                return <Navigate to="/" replace/>
-            }).catch(function (error) {
-                console.log(error);
+                navigate("/publicdate")
+            }).catch((error) => {
+                setLoading(false)
+                api.info({
+                    message: 'Ошибка',
+                    description: error.response.data.error.message,
+                    placement: 'bottom'
+                })
             })
     }
 
     return (
         <>
+            {contextHolder}
             <div className="conteinerLeftRight" style={{ display: 'flex', justifyContent: 'space-around' }}>
                 <div className="containerLeft" style={{ width: '50%' }}>
                     <div className="containerImage" style={{ background: 'linear-gradient(130deg,#FBEECE, #EAEECA)', height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
@@ -53,40 +66,45 @@ const RegUser = () => {
                                     }}
                                     onFinish={(values) => onFinish(values)}
                                 >
-                                    <Form.Item
-                                        layout='vertical'
-                                        label="E-mail"
-                                        name="email"
-                                        style={{ marginBottom: '40px' }}
-                                    >
-                                        <Input
-                                            placeholder='E-mail'
-                                            style={{ width: '450px', color: "var(--color-3333)" }}></Input>
-                                    </Form.Item>
-                                    <Form.Item
-                                        layout='vertical'
-                                        label="Логин"
-                                        name="login"
-                                        style={{ marginBottom: '40px' }}
-                                    >
-                                        <Input
-                                            placeholder='Логин'
-                                            style={{ width: '450px', color: "var(--color-3333)" }}></Input>
-                                    </Form.Item>
-                                    <Form.Item
-                                        layout='vertical'
-                                        label="Пароль"
-                                        name="password"
-                                        style={{ marginBottom: '40px', fontFamily: "TT Commons", fontWeight: 400, color: "var(--color-3333)" }}
-                                    >
-                                        <Input
-                                            placeholder='Пароль'
-                                            style={{ width: '450px', color: "var(--color-3333)" }}></Input>
-                                    </Form.Item>
-                                    <Form.Item
-                                        style={{ marginBottom: '10px' }}>
-                                        <Checkbox style={{ fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>Запомнить меня</Checkbox>
-                                    </Form.Item>
+                                    <Spin spinning={loading} indicator={<LoadingOutlined style={{ color: "var(--color-fbee)" }} />} size='large'>
+
+
+                                        <Form.Item
+                                            layout='vertical'
+                                            label="E-mail"
+                                            name="email"
+                                            style={{ marginBottom: '40px' }}
+                                        >
+                                            <Input
+                                                placeholder='E-mail'
+                                                style={{ width: '450px', color: "var(--color-3333)" }}></Input>
+                                        </Form.Item>
+                                        <Form.Item
+                                            layout='vertical'
+                                            label="Логин"
+                                            name="login"
+                                            style={{ marginBottom: '40px' }}
+                                        >
+                                            <Input
+                                                placeholder='Логин'
+                                                style={{ width: '450px', color: "var(--color-3333)" }}></Input>
+                                        </Form.Item>
+                                        <Form.Item
+                                            layout='vertical'
+                                            label="Пароль"
+                                            name="password"
+                                            style={{ marginBottom: '40px', fontFamily: "TT Commons", fontWeight: 400, color: "var(--color-3333)" }}
+                                        >
+                                            <Input
+                                                placeholder='Пароль'
+                                                style={{ width: '450px', color: "var(--color-3333)" }}></Input>
+                                        </Form.Item>
+
+                                        <Form.Item
+                                            style={{ marginBottom: '10px', display: 'flex' }}>
+                                            <Checkbox style={{ fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>Запомнить меня</Checkbox>
+                                        </Form.Item>
+                                    </Spin>
                                     <Typography.Text style={{ marginBottom: '10px', fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>У меня уже есть аккаунт, <Typography.Link className='regLink' style={{ fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }} href='/authuser'>Войти?</Typography.Link></Typography.Text>
                                     {/* <Typography.Text style={{ marginBottom: '10px' }}><Typography.Link className='forgotThePasswordLink' style={{ marginBottom: '10px', fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>Забыл пароль?</Typography.Link></Typography.Text> */}
                                     <Form.Item>

@@ -5,12 +5,13 @@ import { Typography } from 'antd'
 const ProfilePage = () => {
   const [data, setData] = useState()
 
-  axios.get('http://localhost:8000/user/profile', {
+  axios.get('https://publicdataapi.onrender.com/user/profile', {
     headers: {
       Authorization: Cookies.get('token')
     }
   })
     .then((response) => {
+      console.log()
       setData(response.data.data.message)
     }).catch(function (error) {
       console.log(error);
