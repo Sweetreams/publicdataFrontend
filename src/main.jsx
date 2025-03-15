@@ -14,6 +14,7 @@ import PublicDataSearch from './components/page/publicDataSearch/PublicDataSearc
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
 import '@ant-design/v5-patch-for-react-19';
+import Asfasf from './components/page/a/Asfasf.jsx'
 
 const router = createBrowserRouter([
   {

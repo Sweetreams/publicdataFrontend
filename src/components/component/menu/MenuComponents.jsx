@@ -1,10 +1,11 @@
-import { BarChartOutlined, DatabaseOutlined, FileOutlined, ForkOutlined, MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons'
-import { Affix, Button, Menu } from 'antd'
+import { BarChartOutlined, DatabaseOutlined, FileOutlined, ForkOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons'
+import { Affix, Button, Menu, Modal } from 'antd'
 import '../../../styles/color.css'
 import '../../../styles/fonts.css'
 import './menuComponents.css'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 const MenuComponents = () => {
     const [collapse, setCollapse] = useState(false)
@@ -25,11 +26,6 @@ const MenuComponents = () => {
             key: '3',
             label: <Link to='/documentation'>Документация</Link>,
             icon: <FileOutlined />
-        },
-        {
-            key: '4',
-            label: <Link to='/profile'>Профиль</Link>,
-            icon: <UserOutlined />
         },
         {
             key: '5',
@@ -66,6 +62,28 @@ const MenuComponents = () => {
                         style={{ position: 'absolute', bottom: '15px', left: '17.2px' }}
                     >
                         {collapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                    </Button>
+
+                    <Button
+                        type="primary"
+                        onClick={() => {
+                            Modal.confirm({
+                                title: "Выход",
+                                content: 'Вы действительно хотите выйти из аккаунта?',
+                                okText: 'Да',
+                                cancelText: 'Нет',
+                                onOk(){
+                                    Cookies.remove('token')
+                                    window.location.reload();
+                                },
+                                onCancel(){
+
+                                }
+                            })
+                        }}
+                        style={{ position: 'absolute', bottom: collapse ? '105px': '15px', left: collapse ? '17.2px' : '142.8px'}}
+                    >
+                        <LogoutOutlined />
                     </Button>
                 </div>
 
