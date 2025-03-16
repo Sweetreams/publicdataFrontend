@@ -1,8 +1,27 @@
-# React + Vite
+# [Анализ публичных данных](https://publicdata-frontend.vercel.app/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Currently, two official plugins are available:
+Проект "Анализ публичных данных" — это платформа для изучения и обмена результатами исследований в области аналитики публичных данных. Цель проекта — сделать аналитику данных более доступной и понятной для широкой аудитории.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Технологии
+Для реализации проекта используются современные инструменты и технологии:
+* Языки программирования: JavaScript.
+* Библиотеки для анализа и визуализации:
+  - antd — библиотека компонентов для React.
+  - antd-charts — библиотека для визуализации данных.
+* Библиотеки для бэкенда:
+  - Express.js — фреймворк для создания серверной части.
+  - Prisma — ORM для работы с базой данных.
+
+## Использование
+После установки и запуска проекта вы сможете:
+* Исследовать публичные данные.
+* Визуализировать результаты аналитики.
+* Делиться своими исследованиями с другими пользователями.
+
+## Связь
+Если у вас есть вопросы, предложения или вы хотите поделиться идеями, напишите мне:
+* Email: pashasurov12345@gmail.com
+* Telegram: @fireAlarmDoubleRR
+Буду рад обратной связи!
