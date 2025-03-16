@@ -4,6 +4,7 @@ import { Layout } from 'antd'
 import { Navigate, Outlet } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import "./styles/color.css"
+import { Analytics } from '@vercel/analytics/react'
 
 const App = () => {
     if (Cookies.get('token') == undefined) {
@@ -11,6 +12,7 @@ const App = () => {
     }
     return (
             <>
+                <Analytics/>
                 <Layout style={{ minHeight: '100vh', display: 'flex', flexDirection: 'row' }}>
                     <MenuComponents />
                     <Layout >
