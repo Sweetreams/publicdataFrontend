@@ -7,14 +7,12 @@ import RegUser from './components/page/regUser/RegUser.jsx'
 import DataAnalysis from './components/page/dataAnalysisPage/DataAnalysis.jsx'
 import AboutProjectPage from './components/page/aboutProjectPage/AboutProjectPage.jsx'
 import DocumentationPage from './components/page/documentationPage/DocumentationPage.jsx'
-import ProfilePage from './components/page/profilePage/ProfilePage.jsx'
 import PublicDataPage from './components/page/publicDataPage/PublicDataPage.jsx'
 import PublicDataSearch from './components/page/publicDataSearch/PublicDataSearch.jsx'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
 import '@ant-design/v5-patch-for-react-19';
-import Asfasf from './components/page/a/Asfasf.jsx'
 
 const router = createBrowserRouter([
   {
@@ -24,6 +22,7 @@ const router = createBrowserRouter([
       {
         path: 'dataanalysis',
         element: <DataAnalysis/>
+        
       },
       {
         path: 'aboutproject',
@@ -32,10 +31,6 @@ const router = createBrowserRouter([
       {
         path: 'documentation',
         element: <DocumentationPage/>
-      },
-      {
-        path: 'profile',
-        element: <ProfilePage/>
       },
       {
         path: 'publicdate',

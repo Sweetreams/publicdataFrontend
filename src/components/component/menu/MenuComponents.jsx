@@ -1,4 +1,4 @@
-import { BarChartOutlined, DatabaseOutlined, FileOutlined, ForkOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons'
+import { BarChartOutlined, DatabaseOutlined, FileOutlined, ForkOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, MoonFilled, SettingOutlined, UserOutlined } from '@ant-design/icons'
 import { Affix, Button, Menu, Modal } from 'antd'
 import '../../../styles/color.css'
 import '../../../styles/fonts.css'
@@ -19,7 +19,7 @@ const MenuComponents = () => {
         },
         {
             key: '2',
-            label: <Link to='/dataanalysis'>Аналитика</Link>,
+            label: <Link to='/dataanalysis'>Аналитика данных</Link>,
             icon: <BarChartOutlined />
         },
         {
@@ -53,7 +53,7 @@ const MenuComponents = () => {
                     <Button
                         type="primary"
                         style={{ position: 'absolute', bottom: collapse ? '60px' : '15px', left: collapse ? '17.2px' : '80px' }}>
-                        <SettingOutlined />
+                        <MoonFilled />
                     </Button>
 
                     <Button

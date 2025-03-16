@@ -12,6 +12,7 @@ export default function authUser() {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const [api, contextHolder] = notification.useNotification()
+document.title = 'Авторизация'
 
   const onFinish = (values) => {
     setLoading(true)
@@ -41,7 +42,7 @@ export default function authUser() {
         </div>
         <div className="containerRight" style={{ width: '50%', display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center' }}>
           <div className="secondContainerRight" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <Typography.Title style={{ fontFamily: "TT Commons", fontWeight: 400, color: "var(--color-3333)" }}>Авторизация</Typography.Title>
+            <Typography.Title className='titleSecondContainer' style={{ fontFamily: "TT Commons", fontWeight: 400, color: "var(--color-3333)" }}>Авторизация</Typography.Title>
             <div className="formContainer" >
               <ConfigProvider
                 theme={{

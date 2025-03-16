@@ -1,8 +1,10 @@
+import { Typography } from 'antd'
 import React from 'react'
 
 const DocumentationPage = () => {
+  document.title = 'Документация'
   return (
-    <div>DocumentationPage</div>
+    <Typography.Title level={4}>Документация</Typography.Title>
   )
 }
 

@@ -11,6 +11,7 @@ const RegUser = () => {
     const [api, contextHolder] = notification.useNotification()
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
+    document.title = 'Регистрация'
     const onFinish = (values) => {
         setLoading(true)
         axios.post('https://publicdataapi.onrender.com/user/createuser', values)

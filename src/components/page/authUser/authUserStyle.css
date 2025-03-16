@@ -1,28 +1,50 @@
-.containerImage{
+.containerImage {
     animation: gradient 5s ease infinite;
 }
 
-.regLink:hover{
+.regLink:hover {
     border-bottom: 1px solid #333333;
 }
 
-.forgotThePasswordLink:hover{
+.forgotThePasswordLink:hover {
     border-bottom: 1px solid #333333;
 }
 
-.ant-checkbox-label{
+.ant-checkbox-label {
     padding-top: 4px;
 }
 
 
-@keyframes gradient{
+@keyframes gradient {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
 }
+
+/* @media (width < 1024px) {
+    .secondContainerRight {
+        width: 350px;
+    }
+
+    .ant-typography.titleSecondContainer {
+        font-size: 28px;
+    }
+
+    #formAuth_login {
+        width: unset !important;
+    }
+
+    .ant-form-item-control-input-content {
+        display: flex;
+        flex: auto;
+        max-width: 100%;
+    }
+} */

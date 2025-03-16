@@ -2,63 +2,102 @@ import { Steps, Timeline, Typography } from 'antd'
 import React from 'react'
 
 const AboutProjectPage = () => {
+  document.title = 'О проекте'
+
   return (
     <>
-      <Typography.Title level={4}>О проекте</Typography.Title>
-      <div className="container">
-        <div className="left_container"
-          style={{
-            width: '50%'
-          }}>
-          <Steps
-            direction='vertical'
-            current={1}
-            items={[
-              {
-                title: 'Подготовка и проектирование',
-                description: 'Определение целей: визуализация публичных данных (давление, экология, соц. показатели и т.д.).',
-                subTitle: '(Сбор требований)'
-              },
-              {
-                title: 'Подготовка и проектирование',
-                description: 'Выбор стека (Vite + React, Ant Design), настройка сервера (Node.js + Express)',
-                subTitle: '(Проектирование архитектуры)'
-              },
-              {
-                title: 'Разработка MVP',
-                description: 'Реализация обработки данных ("Adj." — корректировка показателей, фильтрация).',
-                subTitle: '(Бэкенд)'
-              },
-              {
-                title: 'Разработка MVP',
-                description: 'Базовая верстка (Ant Design Components: таблицы, карточки, Steps для пошаговой аналитики).',
-                subTitle: '(Фронтенд)'
-              },
-              {
-                title: 'Расширение функционала',
-                description: 'Реализация "Timeline Ant Design" для отслеживания изменений данных во времени.',
-                subTitle: '(Дополнительные фичи)'
-              },
-              {
-                title: 'Тестирование и доработки',
-                description: 'Проверка интерфейса на удобство (фильтры, адаптивность).',
-                subTitle: '(Юзабилити-тесты)'
-              },
-              {
-                title: 'Запуск и поддержка',
-                description: 'Размещение на хостинге',
-                subTitle: '(Деплой)'
-              },
-            ]} />
+    <div style={{display: 'flex', justifyContent: 'center'}}>
+
+    
+      <div style={{maxWidth: '900px'}}>
+        <Typography.Title level={4} style={{ paddingBottom: '13.2px' }}>О проекте</Typography.Title>
+        <div style={{ textAlign: 'left' }}>
+          <Typography.Text>Этот сайт — мой pet-проект, созданный с целью исследования, анализа и визуализации публичных данных. Здесь я собираю, обрабатываю и представляю информацию, которая может быть полезна для всех, кто интересуется аналитикой, статистикой и открытыми данными.</Typography.Text>
+          <Typography.Title level={5}>Зачем этот проект?</Typography.Title>
+          <Typography.Text>Я всегда увлекался работой с данными и хотел создать платформу, где можно было бы не только изучать, но и делиться результатами своих исследований. Этот сайт — моя попытка сделать аналитику публичных данных более доступной и понятной для широкой аудитории.</Typography.Text>
+          <Typography.Title level={5}>Что вы найдете здесь?</Typography.Title>
+          <ul type="disc" style={{ paddingBottom: '19.2px', paddingLeft: '24px' }}>
+            <li style={{ paddingBottom: '7px' }}><Typography.Text><b>Аналитика публичных данных</b>: Я собираю данные из открытых источников (государственные порталы, социальные сети, публичные API и т.д.), анализирую их и делюсь своими выводами.</Typography.Text></li>
+            <li style={{ paddingBottom: '7px' }}><Typography.Text><b>Визуализация</b>: Сложные данные становятся понятнее, когда они представлены в виде графиков, диаграмм и интерактивных карт. Здесь вы найдете наглядные примеры.</Typography.Text></li>
+            <li><Typography.Text><b>Инструменты для анализа</b>: Я разрабатываю и тестирую различные методы обработки данных, которыми можно воспользоваться для своих исследований.</Typography.Text></li>
+          </ul>
+          <Typography.Title level={5}>Технологии</Typography.Title>
+          <Typography.Text >Для реализации проекта используются современные инструменты и технологии:</Typography.Text>
+
+          <ul type="disc" style={{ paddingBottom: '19.2px', paddingTop: '10px', paddingLeft: '24px' }}>
+            <li style={{ paddingBottom: '7px' }}><Typography.Text><b>Языки программирования</b>: JavaScript.</Typography.Text></li>
+            <li style={{ paddingBottom: '7px' }}><Typography.Text><b>Библиотеки для анализа и визуализации</b>: antd, antd-charts</Typography.Text></li>
+            <li><Typography.Text><b>Библиотеки для backend'a</b>: express-js, prisma.</Typography.Text></li>
+          </ul>
+          <Typography.Title level={5}>Связь</Typography.Title>
+          <Typography.Text>Если у вас есть вопросы, предложения или вы хотите поделиться идеями, напишите мне на pashasurov12345@gmail.com или свяжитесь через telegram: @fireAlarmDoubleRR. Буду рад обратной связи!</Typography.Text>
+          <Typography.Title level={5} style={{ paddingBottom: '19.2px' }}>Планы на будущее</Typography.Title>
         </div>
-        <div className="right_container"
-          style={{
-            width: '50%'
-          }}> 
-            
+        <div className="container">
+          <div className="left_container">
+            <Steps
+              direction='vertical'
+              current={0}
+              items={[
+                {
+                  title: 'Расширение функционала',
+                  description:
+                    <>
+                      <div >1. Интерактивные инструменты: </div>
+                      <ul style={{ paddingLeft: '20px', paddingBottom: '10px' }}>
+                        <li style={{ paddingBottom: '7px', paddingTop: '7px' }}>Добавить возможность фильтрации данных на сайте (например, по регионам, временным периодам)</li>
+                        <li>Создать простые калькуляторы или аналитические инструменты (например, прогнозирование на основе данных).</li>
+                      </ul>
+                      <div >2. Улучшение визуализации: </div>
+                      <ul style={{ paddingLeft: '20px' }}>
+                        <li style={{ paddingTop: '7px' }}>Внедрить интерактивные графики и карты.</li>
+                      </ul>
+                    </>,
+                  subTitle: '(3–6 месяцев)'
+                },
+                {
+                  title: 'Масштабирование и автоматизация',
+                  description: <>
+                    <div >1. Автоматизация сбора данных: </div>
+                    <ul style={{ paddingLeft: '20px', paddingBottom: '10px' }}>
+                      <li style={{ paddingBottom: '7px', paddingTop: '7px' }}>Настроить регулярный парсинг и обновление данных из источников.</li>
+                      <li>Реализовать уведомления о новых данных или изменениях в существующих.</li>
+                    </ul>
+                    <div >2. Расширение тематики: </div>
+                    <ul style={{ paddingLeft: '20px' }}>
+                      <li style={{ paddingTop: '7px' }}>Добавить новые категории аналитики (например, экономика, экология, социальные данные).</li>
+                      <li>Провести кросс-анализ данных из разных источников.</li>
+                    </ul>
+                  </>,
+                  subTitle: '(6–12 месяцев)'
+                },
+                {
+                  title: 'Долгосрочные цели',
+                  description: <>
+                    <div >1. Мобильная версия и приложение: </div>
+                    <ul style={{ paddingLeft: '20px', paddingBottom: '10px' }}>
+                      <li style={{ paddingBottom: '7px', paddingTop: '7px' }}>Разработать мобильную версию сайта или приложение для удобного доступа к данным.</li>
+                      <li>Добавить push-уведомления о новых отчетах или обновлениях.</li>
+                    </ul>
+                    <div >2. API для разработчиков: </div>
+                    <ul style={{ paddingLeft: '20px', paddingBottom: '10px' }}>
+                      <li style={{ paddingBottom: '7px', paddingTop: '7px' }}>Создать открытое API для доступа к данным сайта.</li>
+                      <li>Разработать документацию для интеграции с другими проектами.</li>
+                    </ul>
+                    <div >3. Машинное обучение и AI: </div>
+                    <ul style={{ paddingLeft: '20px' }}>
+                      <li style={{ paddingBottom: '7px', paddingTop: '7px' }}>Внедрить алгоритмы машинного обучения для прогнозирования и анализа трендов.</li>
+                      <li>Добавить раздел с AI-инструментами для автоматической аналитики.</li>
+                    </ul>
+                  </>,
+                  subTitle: '(1–2 года)'
+                },
+              ]} />
+          </div>
+
         </div>
       </div>
-
+      </div>
     </>
   )
 
