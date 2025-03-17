@@ -87,9 +87,9 @@ document.title = 'Авторизация'
                       style={{ marginBottom: '40px', fontFamily: "TT Commons", fontWeight: 400, color: "var(--color-3333)" }}
                     >
 
-                      <Input
+                      <Input.Password
                         placeholder='Пароль'
-                        style={{ width: '450px', color: "var(--color-3333)" }}></Input>
+                        style={{ width: '450px', color: "var(--color-3333)" }}></Input.Password>
 
                     </Form.Item>
                     <Form.Item
