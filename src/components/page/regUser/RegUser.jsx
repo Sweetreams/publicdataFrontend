@@ -6,6 +6,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import { LoadingOutlined } from '@ant-design/icons'
+import ImageRegAuthPage from '../../component/imageRegAuthPage/imageRegAuthPage'
 
 const RegUser = () => {
     const [api, contextHolder] = notification.useNotification()
@@ -33,11 +34,7 @@ const RegUser = () => {
         <>
             {contextHolder}
             <div className="conteinerLeftRight" style={{ display: 'flex', justifyContent: 'space-around' }}>
-                <div className="containerLeft" style={{ width: '50%' }}>
-                    <div className="containerImage" style={{ background: 'linear-gradient(130deg,#FBEECE, #EAEECA)', height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
-                        <img className="imageSun" src="../../../sun.png" alt="" style={{ height: '50vh', width: '50vh', position: 'absolute', zIndex: 2 }} />
-                    </div>
-                </div>
+                <ImageRegAuthPage/>
                 <div className="containerRight" style={{ width: '50%', display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center' }}>
                     <div className="secondContainerRight" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                         <Typography.Title style={{ fontFamily: "TT Commons", fontWeight: 400, color: "var(--color-3333)" }}>Регистрация</Typography.Title>
@@ -108,7 +105,6 @@ const RegUser = () => {
                                         </Form.Item>
                                     </Spin>
                                     <Typography.Text style={{ marginBottom: '10px', fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>У меня уже есть аккаунт, <Typography.Link className='regLink' style={{ fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }} href='/authuser'>Войти?</Typography.Link></Typography.Text>
-                                    {/* <Typography.Text style={{ marginBottom: '10px' }}><Typography.Link className='forgotThePasswordLink' style={{ marginBottom: '10px', fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>Забыл пароль?</Typography.Link></Typography.Text> */}
                                     <Form.Item>
                                         <Button
                                             style={{ width: '170px' }}

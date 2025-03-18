@@ -7,6 +7,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import { LoadingOutlined } from '@ant-design/icons'
+import ImageRegAuthPage from '../../component/imageRegAuthPage/imageRegAuthPage'
 
 export default function authUser() {
   const navigate = useNavigate()
@@ -35,11 +36,7 @@ document.title = 'Авторизация'
     <>
     {contextHolder}
       <div className="conteinerLeftRight" style={{ display: 'flex', justifyContent: 'space-around' }}>
-        <div className="containerLeft" style={{ width: '50%' }}>
-          <div className="containerImage" style={{ background: 'linear-gradient(130deg,#FBEECE, #EAEECA)', height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
-            <img className="imageSun" src="../../../sun.png" alt="" style={{ height: '50vh', width: '50vh', position: 'absolute', zIndex: 2 }} />
-          </div>
-        </div>
+      <ImageRegAuthPage/>
         <div className="containerRight" style={{ width: '50%', display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center' }}>
           <div className="secondContainerRight" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <Typography.Title className='titleSecondContainer' style={{ fontFamily: "TT Commons", fontWeight: 400, color: "var(--color-3333)" }}>Авторизация</Typography.Title>
@@ -98,12 +95,9 @@ document.title = 'Авторизация'
                     </Form.Item>
                   </Spin>
                   <Typography.Text style={{ marginBottom: '10px', fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>У меня нет аккаунта, <Typography.Link className='regLink' style={{ fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }} href='/reguser'>Зарегистрироваться?</Typography.Link></Typography.Text>
-                  {/* <Typography.Text style={{ marginBottom: '10px' }}><Typography.Link className='forgotThePasswordLink' style={{ marginBottom: '10px', fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>Забыл пароль?</Typography.Link></Typography.Text> */}
                   <Form.Item>
-
                     <Button
                       style={{ width: '130px' }} htmlType='submit'> <Typography.Text style={{ fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)", paddingTop: "3px" }}>Войти</Typography.Text> </Button>
-
                   </Form.Item>
                 </Form>
               </ConfigProvider>
