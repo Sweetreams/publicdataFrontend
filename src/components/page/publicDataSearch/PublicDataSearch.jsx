@@ -4,6 +4,7 @@ import { useLocation, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { LoadingOutlined, SearchOutlined } from '@ant-design/icons'
+import instance from '../../units/instance'
 
 const publicDataSearch = () => {
   let { id } = useParams()
@@ -86,11 +87,7 @@ const publicDataSearch = () => {
   });
 
   useEffect(() => {
-    axios.get(`https://publicdataapi.onrender.com/set/getdataset?id=${Number(id)}`, {
-      headers: {
-        Authorization: Cookies.get('token')
-      }
-    }).then((response) => {
+    instance.get(`https://publicdataapi.onrender.com/set/getdataset?id=${Number(id)}`).then((response) => {
       console.log(response)
       setData(Object.values(response.data.data.message.data[0].data.data))
       setTitle(Object.values(response.data.data.message.data[0].data.title).map((el) => {

@@ -9,6 +9,7 @@ import Cookies from 'js-cookie'
 import { LoadingOutlined } from '@ant-design/icons'
 import TextArea from 'antd/es/input/TextArea'
 import { jwtDecode } from 'jwt-decode'
+import instance from '../../units/instance'
 
 const PublicDataPage = () => {
   const [api, contextHolder] = notification.useNotification()
@@ -19,7 +20,7 @@ const PublicDataPage = () => {
   document.title = 'Данные'
 
   const getDataForExport = (id) => {
-    axios.get(`https://publicdataapi.onrender.com/set/getdataset?id=${Number(id)}`, {
+    instance.get(`https://publicdataapi.onrender.com/set/getdataset?id=${Number(id)}`, {
       headers: {
         Authorization: Cookies.get('token')
       }
@@ -35,13 +36,8 @@ const PublicDataPage = () => {
   }
 
   useEffect(() => {
-    axios.get('https://publicdataapi.onrender.com/set/getdata', {
-      headers: {
-        Authorization: Cookies.get('token')
-      }
-    }).then((response) => {
+    instance.get('/set/getdata').then((response) => {
       setLoading(false)
-
       setData(response.data.data.message)
     }).catch((error) => {
       setLoading(false)

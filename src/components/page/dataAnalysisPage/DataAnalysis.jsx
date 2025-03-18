@@ -5,6 +5,7 @@ import Cookies from 'js-cookie'
 import { Area, Bar, Heatmap, Line, Pie, Scatter } from '@ant-design/charts'
 import '../../../styles/color.css'
 import { SearchOutlined } from '@ant-design/icons'
+import instance from '../../units/instance'
 
 const DataAnalysis = () => {
   const [api, contextHolder] = notification.useNotification()
@@ -105,7 +106,7 @@ const DataAnalysis = () => {
   });
 
   useEffect(() => {
-    axios.get(`https://publicdataapi.onrender.com/set/getdataset?id=${idURL1}`, {
+    instance.get(`https://publicdataapi.onrender.com/set/getdataset?id=${idURL1}`, {
       headers: {
         Authorization: Cookies.get('token')
       }
@@ -144,7 +145,7 @@ const DataAnalysis = () => {
   }, [idURL1])
 
   useEffect(() => {
-    axios.get(`https://publicdataapi.onrender.com/set/getdataset?id=${idURL2}`, {
+    instance.get(`https://publicdataapi.onrender.com/set/getdataset?id=${idURL2}`, {
       headers: {
         Authorization: Cookies.get('token')
       }
@@ -164,11 +165,7 @@ const DataAnalysis = () => {
   }, [idURL2])
 
   useEffect(() => {
-    axios.get('https://publicdataapi.onrender.com/set/getdata', {
-      headers: {
-        Authorization: Cookies.get('token')
-      }
-    }).then((response) => {
+    instance.get('https://publicdataapi.onrender.com/set/getdata').then((response) => {
       const tr = []
       response.data.data.message.forEach(element => {
         tr.push({ "label": element.data.title, "value": element.data.title, "id": element.data.title, 'key': element.data.key })
