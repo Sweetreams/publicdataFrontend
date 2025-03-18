@@ -119,7 +119,6 @@ const DataAnalysis = () => {
 
         if (el.filter) {
           delete el["filter"]
-          console.log(el.dataIndex)
           el['filterDropdown'] = getColumnSearchProps(el.dataIndex)['filterDropdown']
           el['filterIcon'] = getColumnSearchProps(el.dataIndex)['filterIcon']
           el['onFilter'] = getColumnSearchProps(el.dataIndex)['onFilter']
@@ -140,7 +139,6 @@ const DataAnalysis = () => {
       //data
       setDataSet1(Object.values(response.data.data.message.data[0].data.data))
     }).catch((error) => {
-      console.log(error)
     })
   }, [idURL1])
 
@@ -173,7 +171,6 @@ const DataAnalysis = () => {
       setTitle(tr)
       setLoading(false)
     }).catch((error) => {
-      console.log(error)
       api.info({
         message: 'Ошибка',
         description: 'Что-то пошло не так!',

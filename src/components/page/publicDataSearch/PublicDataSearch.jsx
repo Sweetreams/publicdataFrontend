@@ -88,12 +88,10 @@ const publicDataSearch = () => {
 
   useEffect(() => {
     instance.get(`https://publicdataapi.onrender.com/set/getdataset?id=${Number(id)}`).then((response) => {
-      console.log(response)
       setData(Object.values(response.data.data.message.data[0].data.data))
       setTitle(Object.values(response.data.data.message.data[0].data.title).map((el) => {
         if (el.filter) {
           delete el["filter"]
-          console.log(el.dataIndex)
           el['filterDropdown'] = getColumnSearchProps(el.dataIndex)['filterDropdown']
           el['filterIcon'] = getColumnSearchProps(el.dataIndex)['filterIcon']
           el['onFilter'] = getColumnSearchProps(el.dataIndex)['onFilter']
@@ -106,7 +104,6 @@ const publicDataSearch = () => {
       }))
       setLoading(false)
     }).catch((error) => {
-      console.log(error)
       api.info({
         message: 'Ошибка',
         description: 'Что-то пошло не так!',

@@ -81,7 +81,7 @@ const PublicDataPage = () => {
         placement: 'bottom'
       })
     })
-    console.log()
+
   }
 
   const columnData = [
@@ -170,7 +170,6 @@ const PublicDataPage = () => {
                       })) : createURLJSON(JSON.stringify(record, null, 2))
                     }
                     else if (key == 4) {
-                      console.log(dataSet)
                       !Object.values(dataSet).length ? (api.info({
                         message: 'Ошибка',
                         description: 'Что-то пошло не так!',
