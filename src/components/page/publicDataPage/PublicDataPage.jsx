@@ -2,7 +2,7 @@ import { Button, DatePicker, Dropdown, Form, Input, message, Modal, notification
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { csvExport } from '../../units/csvExport'
-import { createURLJSON, createURLCSV } from '../../units/createURL'
+import { createURL } from '../../units/createURL'
 import './publicDataPage.css'
 import axios from 'axios'
 import Cookies from 'js-cookie'
@@ -156,7 +156,7 @@ const PublicDataPage = () => {
                     getDataForExport(_)
                     if (key == 5) {
                       const recdata = csvExport(record)
-                      recdata != 1 ? createURLCSV(recdata) : (api.info({
+                      recdata != 1 ? createURL(recdata, 'csv') : (api.info({
                         message: 'Ошибка',
                         description: 'Что-то пошло не так!',
                         placement: 'bottom'
@@ -167,14 +167,14 @@ const PublicDataPage = () => {
                         message: 'Ошибка',
                         description: 'Что-то пошло не так!',
                         placement: 'bottom'
-                      })) : createURLJSON(JSON.stringify(record, null, 2))
+                      })) : createURL(JSON.stringify(record, null, 2), 'json')
                     }
                     else if (key == 4) {
                       !Object.values(dataSet).length ? (api.info({
                         message: 'Ошибка',
                         description: 'Что-то пошло не так!',
                         placement: 'bottom'
-                      })) : createURLJSON(JSON.stringify(dataSet, null, 2))
+                      })) : createURL(JSON.stringify(dataSet, null, 2), 'json')
                     }
                   }
                 }}
