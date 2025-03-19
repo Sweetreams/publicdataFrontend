@@ -1,6 +1,7 @@
 # [Анализ публичных данных](https://publicdata-frontend.vercel.app/)
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/0728259cc167e179f4c3/maintainability)](https://api.codeclimate.com/v1/badges/0728259cc167e179f4c3/maintainability)
 
 Проект "Анализ публичных данных" — это платформа для изучения и обмена результатами исследований в области аналитики публичных данных. Цель проекта — сделать аналитику данных более доступной и понятной для широкой аудитории.
 
