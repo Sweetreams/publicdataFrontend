@@ -1,4 +1,4 @@
-import { Button, DatePicker, Dropdown, Form, Input, message, Modal, notification, Space, Spin, Table, Typography, Upload } from 'antd'
+import { Button, Dropdown, Form, Modal, notification, Space, Spin, Table, Typography } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { csvExport } from '../../units/csvExport'
@@ -7,10 +7,10 @@ import './publicDataPage.css'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { LoadingOutlined } from '@ant-design/icons'
-import TextArea from 'antd/es/input/TextArea'
 import { jwtDecode } from 'jwt-decode'
 import instance from '../../units/instance'
 import InputsAuthReg from '../../component/form/InputsAuthReg'
+import { TransformationMassiv } from '../../units/transformationMassiv'
 
 const PublicDataPage = () => {
   const [api, contextHolder] = notification.useNotification()
@@ -49,17 +49,6 @@ const PublicDataPage = () => {
       })
     })
   }, [])
-
-  const TransformationMassiv = () => {
-    try {
-      let massiv = []
-      Object.values(data).forEach((el) => {
-        massiv.push(el.data)
-      })
-      return massiv
-    } catch (error) {
-    }
-  }
 
   const onDelete = (record) => {
     axios.delete('https://publicdataapi.onrender.com/set/deletesetdbanddataset', {
@@ -163,20 +152,11 @@ const PublicDataPage = () => {
                         placement: 'bottom'
                       }))
                     }
-                    else if (key == 6) {
-                      !Object.values(record).length ? (api.info({
-                        message: 'Ошибка',
-                        description: 'Что-то пошло не так!',
-                        placement: 'bottom'
-                      })) : createURL(JSON.stringify(record, null, 2), 'json')
-                    }
-                    else if (key == 4) {
-                      !Object.values(dataSet).length ? (api.info({
-                        message: 'Ошибка',
-                        description: 'Что-то пошло не так!',
-                        placement: 'bottom'
-                      })) : createURL(JSON.stringify(dataSet, null, 2), 'json')
-                    }
+                    !Object.values(key == 4 ? dataSet : key == 6 ? record : null).length ? (api.info({
+                      message: 'Ошибка',
+                      description: 'Что-то пошло не так!',
+                      placement: 'bottom'
+                    })) : createURL(JSON.stringify(key == 4 ? dataSet : key == 6 ? record : null, null, 2), 'json')
                   }
                 }}
               >
@@ -199,7 +179,6 @@ const PublicDataPage = () => {
   }
 
   const onFinish = (values) => {
-
     axios.post('https://publicdataapi.onrender.com/set/createsetanddataset',
       {
         set: {
@@ -217,7 +196,7 @@ const PublicDataPage = () => {
       }
     })
       .then((response) => {
-        setIsModalOpen(false)
+        console.log(response)
       }).catch((error) => {
         setLoading(false)
         api.info({
@@ -268,66 +247,6 @@ const PublicDataPage = () => {
                 name: "dataset"
               },
             ]} />
-            {/* <Form.Item
-              layout='vertical'
-              label='Заголовок'
-              name='title'
-              rules={[{ required: true }]}
-              style={{ marginBottom: '40px' }}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              layout='vertical'
-              label='Описание'
-              name='desc'
-              rules={[{ required: true }]}
-              style={{ marginBottom: '60px' }}>
-              <TextArea />
-            </Form.Item>
-
-            <Form.Item
-              layout='vertical'
-              label='Ответственный за информацию'
-              name='owner_data'
-              rules={[{ required: true }]}
-              style={{ marginBottom: '40px' }}>
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              layout='vertical'
-              label='Формат данных'
-              name='format_data'
-              rules={[{ required: true }]}
-              style={{ marginBottom: '40px' }}>
-              <Input />
-            </Form.Item>
-            <Form.Item
-              layout='vertical'
-              label='Дата публикации'
-              name='date_publication'
-              rules={[{ required: true }]}
-              style={{ marginBottom: '40px' }}>
-              <DatePicker />
-            </Form.Item>
-            <Form.Item
-              layout='vertical'
-              label='Дата обновления'
-              name='date_update'
-              rules={[{ required: true }]}
-              style={{ marginBottom: '60px' }}>
-              <DatePicker />
-            </Form.Item>
-            <Form.Item
-              layout='vertical'
-              label='Данные набора'
-              name='dataset'
-              rules={[{ required: true }]}
-              style={{ marginBottom: '60px' }}>
-              <TextArea />
-            </Form.Item> */}
             <div style={{ gap: '20px', display: 'flex', justifyContent: 'flex-end' }}>
               <Form.Item>
                 <Button onClick={handleCancel}>Выйти</Button>
@@ -336,21 +255,16 @@ const PublicDataPage = () => {
                 <Button htmlType='submit' onClick={handleCancel}>Отправить</Button>
               </Form.Item>
             </div>
-
           </Form>
         </Modal>
-
         <div className="up_container" style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
           <Typography.Title level={4}>Публичные данные</Typography.Title>
           <Button onClick={showModal}>Импорт</Button>
         </div></>) : <Typography.Title level={4}>Публичные данные</Typography.Title>}
       <br />
-
       <Spin spinning={loading} indicator={<LoadingOutlined style={{ color: "var(--color-fbee)" }} />} size='large'>
-        <Table columns={columnData} dataSource={TransformationMassiv()} />
+        <Table columns={columnData} dataSource={TransformationMassiv(data)} />
       </Spin>
-
-
     </>
 
   )
