@@ -33,6 +33,7 @@ const DataAnalysis = () => {
 
   const [name1, setName1] = useState(Area)
   const [name2, setName2] = useState(Area)
+
   const searchInput = useRef(null);
   document.title = 'Аналитика данных'
 
@@ -203,21 +204,17 @@ const DataAnalysis = () => {
     setYArg2(values.value)
   }
 
-  const typeChart = {
+  const onChangeName = (values, options) => {
+    options.top == 1 ? setName1(values.value) : setName2(values.value)
+  }
 
+  //перенести в другой файл
+  const typeChart = {
     Line: Line,
     Area: Area,
     Scatter: Scatter,
     Bar: Bar,
     Pie: Pie
-  }
-
-  const onChangeName1 = (values) => {
-    setName1(values.value)
-  }
-
-  const onChangeName2 = (values) => {
-    setName2(values.value)
   }
 
   const ChartComponent1 = typeChart[name1];
@@ -258,28 +255,33 @@ const DataAnalysis = () => {
                 style={{ width: '140px' }}
                 loading={loading}
                 labelInValue
-                onChange={onChangeName1}
+                onChange={(value, options) => onChangeName(value, options)}
                 placeholder="Тип графика..."
                 options={[
                   {
                     value: 'Area',
                     label: 'Area',
+                    top: 1
                   },
                   {
                     value: 'Scatter',
                     label: 'Scatter',
+                    top: 1
                   },
                   {
                     value: 'Bar',
                     label: 'Bar',
+                    top: 1
                   },
                   {
                     value: 'Line',
                     label: 'Line',
+                    top: 1
                   },
                   {
                     value: 'Pie',
                     label: 'Pie',
+                    top: 1
                   },
                 ]}
               />
@@ -287,6 +289,9 @@ const DataAnalysis = () => {
                 style={{ width: '140px' }}
                 loading={loading}
                 labelInValue
+                onSelect={(value) => {
+                  console.log(value)
+                }}
                 onChange={onChangeX1}
                 placeholder="Ось x..."
                 options={titleDataSetForDG1}
@@ -322,28 +327,33 @@ const DataAnalysis = () => {
                 style={{ width: '140px' }}
                 loading={loading}
                 labelInValue
-                onChange={onChangeName2}
+                onChange={(value, options) => onChangeName(value, options)}
                 placeholder="Тип графика..."
                 options={[
                   {
                     value: 'Area',
                     label: 'Area',
+                    top: 2
                   },
                   {
                     value: 'Scatter',
                     label: 'Scatter',
+                    top: 2
                   },
                   {
                     value: 'Bar',
                     label: 'Bar',
+                    top: 2
                   },
                   {
                     value: 'Line',
                     label: 'Line',
+                    top: 2
                   },
                   {
                     value: 'Pie',
                     label: 'Pie',
+                    top: 2
                   },
                 ]}
               />
@@ -365,8 +375,6 @@ const DataAnalysis = () => {
               />
             </div>
             <div className="area_container" style={{ width: "500px", height: "500px" }}>
-
-
               {
                 ChartComponent2 && (
                   <ChartComponent2

@@ -8,12 +8,13 @@ import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import { LoadingOutlined } from '@ant-design/icons'
 import ImageRegAuthPage from '../../component/imageRegAuthPage/imageRegAuthPage'
+import InputsAuthReg from '../../component/form/InputsAuthReg'
 
 export default function authUser() {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const [api, contextHolder] = notification.useNotification()
-document.title = 'Авторизация'
+  document.title = 'Авторизация'
 
   const onFinish = (values) => {
     setLoading(true)
@@ -34,9 +35,9 @@ document.title = 'Авторизация'
 
   return (
     <>
-    {contextHolder}
+      {contextHolder}
       <div className="conteinerLeftRight" style={{ display: 'flex', justifyContent: 'space-around' }}>
-      <ImageRegAuthPage/>
+        <ImageRegAuthPage />
         <div className="containerRight" style={{ width: '50%', display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center' }}>
           <div className="secondContainerRight" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <Typography.Title className='titleSecondContainer' style={{ fontFamily: "TT Commons", fontWeight: 400, color: "var(--color-3333)" }}>Авторизация</Typography.Title>
@@ -66,29 +67,17 @@ document.title = 'Авторизация'
                   }}
                   onFinish={(values) => onFinish(values)}
                 >
-                  <Spin spinning={loading} indicator={<LoadingOutlined style={{color: "var(--color-fbee)"}}/>} size='large'>
-                    <Form.Item
-                      layout='vertical'
-                      label="Логин"
-                      name='login'
-                      style={{ marginBottom: '40px' }}
-                    >
-                      <Input
-                        placeholder='Логин'
-                        style={{ width: '450px', color: "var(--color-3333)" }}></Input>
-                    </Form.Item>
-                    <Form.Item
-                      layout='vertical'
-                      label="Пароль"
-                      name='password'
-                      style={{ marginBottom: '40px', fontFamily: "TT Commons", fontWeight: 400, color: "var(--color-3333)" }}
-                    >
-
-                      <Input.Password
-                        placeholder='Пароль'
-                        style={{ width: '450px', color: "var(--color-3333)" }}></Input.Password>
-
-                    </Form.Item>
+                  <Spin spinning={loading} indicator={<LoadingOutlined style={{ color: "var(--color-fbee)" }} />} size='large'>
+                    <InputsAuthReg props={[
+                      {
+                        label: "Логин",
+                        name: "login"
+                      },
+                      {
+                        label: "Пароль",
+                        name: "password"
+                      },
+                    ]} />
                     <Form.Item
                       style={{ marginBottom: '10px', display: 'flex', }}>
                       <Checkbox style={{ fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>Запомнить меня</Checkbox>

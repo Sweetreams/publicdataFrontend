@@ -7,6 +7,7 @@ import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import { LoadingOutlined } from '@ant-design/icons'
 import ImageRegAuthPage from '../../component/imageRegAuthPage/imageRegAuthPage'
+import InputsAuthReg from '../../component/form/InputsAuthReg'
 
 const RegUser = () => {
     const [api, contextHolder] = notification.useNotification()
@@ -34,7 +35,7 @@ const RegUser = () => {
         <>
             {contextHolder}
             <div className="conteinerLeftRight" style={{ display: 'flex', justifyContent: 'space-around' }}>
-                <ImageRegAuthPage/>
+                <ImageRegAuthPage />
                 <div className="containerRight" style={{ width: '50%', display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center' }}>
                     <div className="secondContainerRight" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                         <Typography.Title style={{ fontFamily: "TT Commons", fontWeight: 400, color: "var(--color-3333)" }}>Регистрация</Typography.Title>
@@ -66,38 +67,20 @@ const RegUser = () => {
                                 >
                                     <Spin spinning={loading} indicator={<LoadingOutlined style={{ color: "var(--color-fbee)" }} />} size='large'>
 
-
-                                        <Form.Item
-                                            layout='vertical'
-                                            label="E-mail"
-                                            name="email"
-                                            style={{ marginBottom: '40px' }}
-                                        >
-                                            <Input
-                                                placeholder='E-mail'
-                                                style={{ width: '450px', color: "var(--color-3333)" }}></Input>
-                                        </Form.Item>
-                                        <Form.Item
-                                            layout='vertical'
-                                            label="Логин"
-                                            name="login"
-                                            style={{ marginBottom: '40px' }}
-                                        >
-                                            <Input
-                                                placeholder='Логин'
-                                                style={{ width: '450px', color: "var(--color-3333)" }}></Input>
-                                        </Form.Item>
-                                        <Form.Item
-                                            layout='vertical'
-                                            label="Пароль"
-                                            name="password"
-                                            style={{ marginBottom: '40px', fontFamily: "TT Commons", fontWeight: 400, color: "var(--color-3333)" }}
-                                        >
-                                            <Input.Password
-                                            type='pa'
-                                                placeholder='Пароль'
-                                                style={{ width: '450px', color: "var(--color-3333)" }}></Input.Password>
-                                        </Form.Item>
+                                        <InputsAuthReg props={[
+                                            {
+                                                label: "E-mail",
+                                                name: "email"
+                                            },
+                                            {
+                                                label: "Логин",
+                                                name: "login"
+                                            },
+                                            {
+                                                label: "Пароль",
+                                                name: "password"
+                                            },
+                                        ]} />
 
                                         <Form.Item
                                             style={{ marginBottom: '10px', display: 'flex' }}>
