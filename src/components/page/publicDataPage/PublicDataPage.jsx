@@ -10,6 +10,7 @@ import { LoadingOutlined } from '@ant-design/icons'
 import TextArea from 'antd/es/input/TextArea'
 import { jwtDecode } from 'jwt-decode'
 import instance from '../../units/instance'
+import InputsAuthReg from '../../component/form/InputsAuthReg'
 
 const PublicDataPage = () => {
   const [api, contextHolder] = notification.useNotification()
@@ -237,7 +238,37 @@ const PublicDataPage = () => {
             onFinish={onFinish}
             name='formAuth'
             variant='filled'>
-            <Form.Item
+            <InputsAuthReg items={[
+              {
+                label: "Заголовок",
+                name: "title"
+              },
+              {
+                label: "Описание",
+                name: "desc"
+              },
+              {
+                label: "Ответственный за информацию",
+                name: "owner_data"
+              },
+              {
+                label: "Формат данных",
+                name: "format_data"
+              },
+              {
+                label: "Дата публикации",
+                name: "date_publication"
+              },
+              {
+                label: "Дата обновления",
+                name: "date_update"
+              },
+              {
+                label: "Данные набора",
+                name: "dataset"
+              },
+            ]} />
+            {/* <Form.Item
               layout='vertical'
               label='Заголовок'
               name='title'
@@ -296,7 +327,7 @@ const PublicDataPage = () => {
               rules={[{ required: true }]}
               style={{ marginBottom: '60px' }}>
               <TextArea />
-            </Form.Item>
+            </Form.Item> */}
             <div style={{ gap: '20px', display: 'flex', justifyContent: 'flex-end' }}>
               <Form.Item>
                 <Button onClick={handleCancel}>Выйти</Button>
@@ -313,7 +344,7 @@ const PublicDataPage = () => {
           <Typography.Title level={4}>Публичные данные</Typography.Title>
           <Button onClick={showModal}>Импорт</Button>
         </div></>) : <Typography.Title level={4}>Публичные данные</Typography.Title>}
-        <br/>
+      <br />
 
       <Spin spinning={loading} indicator={<LoadingOutlined style={{ color: "var(--color-fbee)" }} />} size='large'>
         <Table columns={columnData} dataSource={TransformationMassiv()} />

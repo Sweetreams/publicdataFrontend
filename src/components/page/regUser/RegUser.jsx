@@ -8,6 +8,9 @@ import { useNavigate } from 'react-router-dom'
 import { LoadingOutlined } from '@ant-design/icons'
 import ImageRegAuthPage from '../../component/imageRegAuthPage/imageRegAuthPage'
 import InputsAuthReg from '../../component/form/InputsAuthReg'
+import SendButton from '../../component/form/SendButton'
+import LinkForm from '../../component/form/LinkForm'
+import ForgotMe from '../../component/form/ForgotMe'
 
 const RegUser = () => {
     const [api, contextHolder] = notification.useNotification()
@@ -67,7 +70,7 @@ const RegUser = () => {
                                 >
                                     <Spin spinning={loading} indicator={<LoadingOutlined style={{ color: "var(--color-fbee)" }} />} size='large'>
 
-                                        <InputsAuthReg props={[
+                                        <InputsAuthReg items={[
                                             {
                                                 label: "E-mail",
                                                 name: "email"
@@ -82,19 +85,16 @@ const RegUser = () => {
                                             },
                                         ]} />
 
-                                        <Form.Item
-                                            style={{ marginBottom: '10px', display: 'flex' }}>
-                                            <Checkbox style={{ fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>Запомнить меня</Checkbox>
-                                        </Form.Item>
+                                        <ForgotMe />
                                     </Spin>
-                                    <Typography.Text style={{ marginBottom: '10px', fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }}>У меня уже есть аккаунт, <Typography.Link className='regLink' style={{ fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)" }} href='/authuser'>Войти?</Typography.Link></Typography.Text>
-                                    <Form.Item>
-                                        <Button
-                                            style={{ width: '170px' }}
-                                            htmlType='submit'>
-                                            <Typography.Text style={{ fontFamily: "TT Commons", fontWeight: 400, fontSize: 16, color: "var(--color-3333)", paddingTop: "3px" }}>Зарегистрироваться</Typography.Text>
-                                        </Button>
-                                    </Form.Item>
+                                    <LinkForm props={
+                                        {
+                                            "text": "У меня уже есть аккаунт",
+                                            "desc": "Войти?",
+                                            "link": "/authuser"
+                                        }
+                                    } />
+                                    <SendButton name={"Зарегистрироваться"} />
                                 </Form>
                             </ConfigProvider>
                         </div>
