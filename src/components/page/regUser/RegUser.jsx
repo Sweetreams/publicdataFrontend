@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import "../../../styles/fonts.css"
 import "../../../styles/color.css"
-import { Button, Checkbox, ConfigProvider, Form, Input, notification, Spin, Typography } from 'antd'
-import axios from 'axios'
+import { ConfigProvider, Form, notification, Spin, Typography } from 'antd'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import { LoadingOutlined } from '@ant-design/icons'
@@ -11,27 +10,29 @@ import InputsAuthReg from '../../component/form/InputsAuthReg'
 import SendButton from '../../component/form/SendButton'
 import LinkForm from '../../component/form/LinkForm'
 import ForgotMe from '../../component/form/ForgotMe'
+import { createUserAxios } from '../../units/api'
 
 const RegUser = () => {
     const [api, contextHolder] = notification.useNotification()
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     document.title = 'Регистрация'
+
     const onFinish = (values) => {
         setLoading(true)
-        axios.post('https://publicdataapi.onrender.com/user/createuser', values)
-            .then((response) => {
-                setLoading(false)
-                Cookies.set('token', response.data.data.token)
-                navigate("/publicdate")
-            }).catch((error) => {
-                setLoading(false)
-                api.info({
-                    message: 'Ошибка',
-                    description: error.response.data.error.message,
-                    placement: 'bottom'
-                })
+        createUserAxios.request({ data: values }).then((response) => {
+            setLoading(false)
+            Cookies.set('token', response.data.data.token)
+            navigate("/publicdate")
+        }).catch((error) => {
+            setLoading(false)
+            api.info({
+                message: 'Ошибка',
+                description: error.response.data.error.message,
+                placement: 'bottom'
             })
+        })
+
     }
 
     return (

@@ -3,7 +3,6 @@ import './authUserStyle.css'
 import "../../../styles/fonts.css"
 import "../../../styles/color.css"
 import { ConfigProvider, Form, notification, Spin, Typography } from 'antd'
-import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import { LoadingOutlined } from '@ant-design/icons'
@@ -12,6 +11,7 @@ import InputsAuthReg from '../../component/form/InputsAuthReg'
 import SendButton from '../../component/form/SendButton'
 import LinkForm from '../../component/form/LinkForm'
 import ForgotMe from '../../component/form/ForgotMe'
+import { authUserAxios } from '../../units/api'
 
 export default function authUser() {
   const navigate = useNavigate()
@@ -21,19 +21,20 @@ export default function authUser() {
 
   const onFinish = (values) => {
     setLoading(true)
-    axios.post('https://publicdataapi.onrender.com/user/loginuser', values)
-      .then((response) => {
-        setLoading(false)
-        Cookies.set('token', response.data.data.token)
-        navigate("/publicdate")
-      }).catch(function (err) {
-        setLoading(false)
-        api.info({
-          message: 'Ошибка',
-          description: 'Что-то пошло не так!',
-          placement: 'bottom'
-        })
+
+    authUserAxios.request({ data: values }).then((response) => {
+      setLoading(false)
+      Cookies.set('token', response.data.data.token)
+      navigate("/publicdate")
+    }).catch(function (err) {
+      setLoading(false)
+      api.info({
+        message: 'Ошибка',
+        description: 'Что-то пошло не так!',
+        placement: 'bottom'
       })
+    })
+
   }
 
   return (

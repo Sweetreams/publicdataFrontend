@@ -8,7 +8,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import { LoadingOutlined } from '@ant-design/icons'
 import { jwtDecode } from 'jwt-decode'
-import instance from '../../units/instance'
+import instance, { createData, deleteData } from '../../units/api'
 import InputsAuthReg from '../../component/form/InputsAuthReg'
 import { TransformationMassiv } from '../../units/transformationMassiv'
 
@@ -51,14 +51,7 @@ const PublicDataPage = () => {
   }, [])
 
   const onDelete = (record) => {
-    axios.delete('https://publicdataapi.onrender.com/set/deletesetdbanddataset', {
-      data: {
-        id: record.key
-      },
-      headers: {
-        Authorization: Cookies.get('token')
-      }
-    }).then((response) => {
+    deleteData.request({ data: { id: record.key } }).then((response) => {
       api.info({
         message: 'Успешно',
         description: 'Запись удалена',
@@ -178,9 +171,11 @@ const PublicDataPage = () => {
     setIsModalOpen(false)
   }
 
+  // Сделать проверку на добавление
+
   const onFinish = (values) => {
-    axios.post('https://publicdataapi.onrender.com/set/createsetanddataset',
-      {
+    createData.request({
+      data: {
         set: {
           "title": values.title,
           "desc": values.desc,
@@ -188,24 +183,18 @@ const PublicDataPage = () => {
           "format_data": values.format_data,
           "date_publication": values.date_publication.format('DD.MM.YYYY'),
           "date_update": values.date_update.format('DD.MM.YYYY')
-        },
-        data: JSON.parse(values.dataset)
-      }, {
-      headers: {
-        Authorization: Cookies.get('token')
+        }, data: JSON.parse(values.dataset)
       }
-    })
-      .then((response) => {
-        console.log(response)
-      }).catch((error) => {
-        setLoading(false)
-        api.info({
-          message: 'Ошибка',
-          description: error.response.data.error.message,
-          placement: 'bottom'
-        })
+    }).then((response) => {
+      console.log(response)
+    }).catch((error) => {
+      setLoading(false)
+      api.info({
+        message: 'Ошибка',
+        description: error.response.data.error.message,
+        placement: 'bottom'
       })
-
+    })
   }
 
   return (

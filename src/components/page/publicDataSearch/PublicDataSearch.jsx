@@ -1,10 +1,8 @@
 import { Button, Input, notification, Space, Spin, Table, Typography } from 'antd'
 import React, { useEffect, useRef, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
-import axios from 'axios'
-import Cookies from 'js-cookie'
 import { LoadingOutlined, SearchOutlined } from '@ant-design/icons'
-import instance from '../../units/instance'
+import instance from '../../units/api'
 
 const publicDataSearch = () => {
   let { id } = useParams()

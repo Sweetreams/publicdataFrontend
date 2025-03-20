@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Button, Input, notification, Select, Space, Table, Typography } from 'antd'
-import axios from 'axios'
 import Cookies from 'js-cookie'
 import { Area, Bar, Heatmap, Line, Pie, Scatter } from '@ant-design/charts'
 import '../../../styles/color.css'
 import { SearchOutlined } from '@ant-design/icons'
-import instance from '../../units/instance'
+import instance from '../../units/api'
 
 const DataAnalysis = () => {
   const [api, contextHolder] = notification.useNotification()
