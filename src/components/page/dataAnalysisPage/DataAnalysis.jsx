@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Button, Input, notification, Select, Space, Table, Typography } from 'antd'
+import { notification, Select, Table, Typography } from 'antd'
 import Cookies from 'js-cookie'
-import { Area, Bar, Heatmap, Line, Pie, Scatter } from '@ant-design/charts'
 import '../../../styles/color.css'
-import { SearchOutlined } from '@ant-design/icons'
 import instance from '../../units/api'
+import { getColumnSearchProps } from '../../component/columnSearch/getColumnSearchProps'
+import { typeChart } from '../../units/typeChart'
 
 const DataAnalysis = () => {
   const [api, contextHolder] = notification.useNotification()
@@ -27,83 +27,10 @@ const DataAnalysis = () => {
   const [xArg2, setXArg2] = useState("")
   const [yArg2, setYArg2] = useState("")
 
-  const [searchText, setSearchText] = useState('');
-  const [searchedColumn, setSearchedColumn] = useState('');
+  const [name1, setName1] = useState()
+  const [name2, setName2] = useState()
 
-  const [name1, setName1] = useState(Area)
-  const [name2, setName2] = useState(Area)
-
-  const searchInput = useRef(null);
   document.title = 'Аналитика данных'
-
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  };
-
-  const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
-      <div
-        style={{
-          padding: 8,
-        }}
-
-      >
-        <Input
-          ref={searchInput}
-          placeholder={`Поиск...`}
-          value={selectedKeys[0]}
-          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{
-            marginBottom: 8,
-            display: 'block',
-          }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{
-              width: 90,
-            }}
-          >
-            Поиск
-          </Button>
-          <Button
-            onClick={() => clearFilters()}
-            size="small"
-            style={{
-              width: 90,
-            }}
-          >
-            Сброс
-          </Button>
-          <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              close();
-            }}
-          >
-            Закрыть
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: (filtered) => (
-      <SearchOutlined
-        style={{
-          color: filtered ? '#1677ff' : undefined,
-        }}
-      />
-    ),
-    onFilter: (value, record) => record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-
-  });
 
   useEffect(() => {
     instance.get(`https://publicdataapi.onrender.com/set/getdataset?id=${idURL1}`, {
@@ -208,13 +135,7 @@ const DataAnalysis = () => {
   }
 
   //перенести в другой файл
-  const typeChart = {
-    Line: Line,
-    Area: Area,
-    Scatter: Scatter,
-    Bar: Bar,
-    Pie: Pie
-  }
+  
 
   const ChartComponent1 = typeChart[name1];
   const ChartComponent2 = typeChart[name2];
@@ -288,9 +209,6 @@ const DataAnalysis = () => {
                 style={{ width: '140px' }}
                 loading={loading}
                 labelInValue
-                onSelect={(value) => {
-                  console.log(value)
-                }}
                 onChange={onChangeX1}
                 placeholder="Ось x..."
                 options={titleDataSetForDG1}
