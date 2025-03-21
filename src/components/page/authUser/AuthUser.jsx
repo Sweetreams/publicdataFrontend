@@ -21,7 +21,7 @@ export default function authUser() {
 
   const onFinish = (values) => {
     setLoading(true)
-
+    console.log(values)
     authUserAxios.request({ data: values }).then((response) => {
       setLoading(false)
       Cookies.set('token', response.data.data.token)

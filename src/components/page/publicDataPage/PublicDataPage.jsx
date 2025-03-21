@@ -1,12 +1,11 @@
-import { Button, Dropdown, Form, Modal, notification, Space, Spin, Table, Typography } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { Button, Dropdown, Form, Input, Modal, notification, Space, Spin, Table, Typography } from 'antd'
+import React, { useEffect, useReducer, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { csvExport } from '../../units/csvExport'
 import { createURL } from '../../units/createURL'
 import './publicDataPage.css'
-import axios from 'axios'
 import Cookies from 'js-cookie'
-import { LoadingOutlined } from '@ant-design/icons'
+import { LoadingOutlined, ReloadOutlined } from '@ant-design/icons'
 import { jwtDecode } from 'jwt-decode'
 import instance, { createData, deleteData } from '../../units/api'
 import InputsAuthReg from '../../component/form/InputsAuthReg'
@@ -18,6 +17,9 @@ const PublicDataPage = () => {
   const [dataSet, setDataSet] = useState()
   const [loading, setLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpenData, setIsModalOpenData] = useState(false)
+ 
+  const [isRecord, setIsRecord] = useState([])
   document.title = 'Данные'
 
   const getDataForExport = (id) => {
@@ -64,6 +66,11 @@ const PublicDataPage = () => {
         placement: 'bottom'
       })
     })
+
+  }
+
+  const onChangeData = (record) => {
+    console.log(record)
 
   }
 
@@ -155,7 +162,12 @@ const PublicDataPage = () => {
               >
                 <Button>Экспорт</Button>
               </Dropdown>
-              {jwtDecode(Cookies.get('token')).role == 'admin' ? <><Button onClick={() => onDelete(record)}>Удалить</Button></> : <></>}
+              {jwtDecode(Cookies.get('token')).role == 'admin'
+                ? <>
+                  <Button onClick={() => onDelete(record)}>Удалить</Button>
+                  <Button onClick={() => showModalData(record)}>Изменить</Button>
+                </>
+                : <></>}
             </Space>
           </>
         )
@@ -169,6 +181,15 @@ const PublicDataPage = () => {
 
   const handleCancel = () => {
     setIsModalOpen(false)
+  }
+
+  const showModalData = (record) => {
+    setIsRecord(record)
+    setIsModalOpenData(true)
+  }
+
+  const handleCancelData = () => {
+    setIsModalOpenData(false)
   }
 
   // Сделать проверку на добавление
@@ -197,62 +218,117 @@ const PublicDataPage = () => {
     })
   }
 
+  const onFinishChange = (values) => {
+
+  }
+
   return (
     <>
-      {jwtDecode(Cookies.get('token')).role == 'admin' ? (<>
-        <Modal title='Форма заполнения данных' open={isModalOpen} onCancel={handleCancel}
-          footer={<></>}>
-          <Form
-            onFinish={onFinish}
-            name='formAuth'
-            variant='filled'>
-            <InputsAuthReg items={[
-              {
-                label: "Заголовок",
-                name: "title"
-              },
-              {
-                label: "Описание",
-                name: "desc"
-              },
-              {
-                label: "Ответственный за информацию",
-                name: "owner_data"
-              },
-              {
-                label: "Формат данных",
-                name: "format_data"
-              },
-              {
-                label: "Дата публикации",
-                name: "date_publication"
-              },
-              {
-                label: "Дата обновления",
-                name: "date_update"
-              },
-              {
-                label: "Данные набора",
-                name: "dataset"
-              },
-            ]} />
-            <div style={{ gap: '20px', display: 'flex', justifyContent: 'flex-end' }}>
-              <Form.Item>
-                <Button onClick={handleCancel}>Выйти</Button>
-              </Form.Item>
-              <Form.Item>
-                <Button htmlType='submit' onClick={handleCancel}>Отправить</Button>
-              </Form.Item>
+      {jwtDecode(Cookies.get('token')).role == 'admin'
+        ? (
+          <>
+            <Modal title='Форма заполнения данных' open={isModalOpen} onCancel={handleCancel}
+              footer={<></>}>
+              <Form
+                onFinish={onFinish}
+                name='formAuth'
+                variant='filled'>
+                <InputsAuthReg items={[
+                  {
+                    label: "Заголовок",
+                    name: "title"
+                  },
+                  {
+                    label: "Описание",
+                    name: "desc"
+                  },
+                  {
+                    label: "Ответственный за информацию",
+                    name: "owner_data"
+                  },
+                  {
+                    label: "Формат данных",
+                    name: "format_data"
+                  },
+                  {
+                    label: "Дата публикации",
+                    name: "date_publication"
+                  },
+                  {
+                    label: "Дата обновления",
+                    name: "date_update"
+                  },
+                  {
+                    label: "Данные набора",
+                    name: "dataset"
+                  },
+                ]} />
+                <div style={{ gap: '20px', display: 'flex', justifyContent: 'flex-end' }}>
+                  <Form.Item>
+                    <Button onClick={handleCancel}>Выйти</Button>
+                  </Form.Item>
+                  <Form.Item>
+                    <Button htmlType='submit' onClick={handleCancel}>Отправить</Button>
+                  </Form.Item>
+                </div>
+              </Form>
+            </Modal>
+
+            <Modal title='Форма обновления данных' open={isModalOpenData} onCancel={handleCancelData}
+              footer={<></>}>
+              <Form
+                onFinish={onFinishChange}
+                name='formAuth'
+                variant='filled'>
+                <InputsAuthReg items={[
+                  {
+                    label: "Заголовок",
+                    name: "title",
+                    value: isRecord?.title
+                  },
+                  {
+                    label: "Описание",
+                    name: "desc",
+                    value: isRecord?.desc
+                  },
+                  {
+                    label: "Ответственный за информацию",
+                    name: "owner_data",
+                    value: isRecord?.owner_data
+                  },
+                  {
+                    label: "Формат данных",
+                    name: "format_data",
+                    value: isRecord?.format_data
+                  }
+                ]} />
+                <div style={{ gap: '20px', display: 'flex', justifyContent: 'flex-end' }}>
+                  <Form.Item>
+                    <Button onClick={handleCancelData}>Выйти</Button>
+                  </Form.Item>
+                  <Form.Item>
+                    <Button htmlType='submit' onClick={handleCancelData}>Отправить</Button>
+                  </Form.Item>
+                </div>
+              </Form>
+            </Modal>
+            <div className="up_container" style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+              <Typography.Title level={4}>Публичные данные</Typography.Title>
+              <Button onClick={showModal}>Импорт</Button>
             </div>
-          </Form>
-        </Modal>
-        <div className="up_container" style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+
+
+          </>)
+        : <>
           <Typography.Title level={4}>Публичные данные</Typography.Title>
-          <Button onClick={showModal}>Импорт</Button>
-        </div></>) : <Typography.Title level={4}>Публичные данные</Typography.Title>}
+        </>
+      }
       <br />
       <Spin spinning={loading} indicator={<LoadingOutlined style={{ color: "var(--color-fbee)" }} />} size='large'>
-        <Table columns={columnData} dataSource={TransformationMassiv(data)} />
+          <Table locale={{
+            emptyText:
+              <Typography.Text>Перезагрузить страницу <Button onClick={() => location.reload()} icon={<ReloadOutlined/>}/> </Typography.Text>
+          }} columns={columnData} dataSource={TransformationMassiv(data)} />
       </Spin>
     </>
 

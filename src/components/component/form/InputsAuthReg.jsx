@@ -14,10 +14,10 @@ const InputsAuthReg = ({ items }) => {
           style={{ marginBottom: element.name == "dataset" || element.name == "desc" ? '60px' :  '40px' }}
         >
           {element.name == "password"
-          ? <Input.Password placeholder={element.label} style={{ width: '450px', color: "var(--color-3333)" }}></Input.Password>
+          ? <Input.Password defaultValue={element.value} placeholder={element.label} style={{ width: '450px', color: "var(--color-3333)" }}></Input.Password>
           : element.name == "dataset" || element.name == "desc"
-          ? <TextArea placeholder={element.label} style={{ width: '450px', color: "var(--color-3333)" }}></TextArea>
-          : <Input placeholder={element.label} style={{ width: '450px', color: "var(--color-3333)" }}></Input>}
+          ? <TextArea defaultValue={element.value} placeholder={element.label} style={{ width: '450px', color: "var(--color-3333)" }}></TextArea>
+          : <Input defaultValue={element.value} placeholder={element.label} style={{ width: '450px', color: "var(--color-3333)" }}></Input>}
         </Form.Item>)
       })}
     </>
